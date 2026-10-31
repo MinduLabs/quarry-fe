@@ -1,5 +1,6 @@
 import type { Lang } from "@/i18n";
 import { localePath, useT } from "@/i18n";
+import { asset } from "@/lib/base";
 import { release } from "@/lib/release";
 import { LINKS } from "@/lib/site";
 
@@ -20,8 +21,8 @@ export function softwareApp(lang: Lang, site: URL): Record<string, unknown> {
     softwareVersion: release.version,
     datePublished: release.publishedAt.toISOString().slice(0, 10),
     downloadUrl: new URL(localePath(lang, "/download"), site).href,
-    image: new URL("/og.jpg", site).href,
-    screenshot: new URL("/img/hero-dark.webp", site).href,
+    image: new URL(asset("/og.jpg"), site).href,
+    screenshot: new URL(asset("/img/hero-dark.webp"), site).href,
     license: "https://www.gnu.org/licenses/agpl-3.0.html",
     isAccessibleForFree: true,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

@@ -1,5 +1,6 @@
 ---
 import { type Lang, localePath, useT } from "@/i18n";
+import { asset } from "@/lib/base";
 import { release } from "@/lib/release";
 import { LINKS } from "@/lib/site";
 
@@ -34,11 +35,12 @@ const to = (p: string) => localePath(lang, p);
       <div>
         <h5>{t("foot.support")}</h5>
         <ul>
-          <li><a href={`mailto:${LINKS.supportEmail}`}>{t("foot.email")}</a></li>
+          {/* <li><a href={`mailto:${LINKS.supportEmail}`}>{t("foot.email")}</a></li> */}
           <li><a href={to("/contact")}>{t("nav.contact")}</a></li>
           <li><a href={LINKS.security}>{t("foot.security")}</a></li>
         </ul>
       </div>
+      {/*
       <div>
         <h5>{t("foot.community")}</h5>
         <ul>
@@ -47,6 +49,7 @@ const to = (p: string) => localePath(lang, p);
           <li><a href={LINKS.x}>X ↗</a></li>
         </ul>
       </div>
+      */}
       <div>
         <h5>{t("foot.legal")}</h5>
         <ul>
@@ -57,7 +60,7 @@ const to = (p: string) => localePath(lang, p);
       </div>
     </div>
     <div class="foot-bottom">
-      <span class="brand"><img src="/img/logo.webp" alt="" width="20" height="20" loading="lazy" />{t("foot.copy", { year: new Date().getFullYear() })}</span>
+      <span class="brand"><img src={asset("/img/logo.webp")} alt="" width="20" height="20" loading="lazy" />{t("foot.copy", { year: new Date().getFullYear() })}</span>
       <span>v{release.version}</span>
     </div>
   </div>

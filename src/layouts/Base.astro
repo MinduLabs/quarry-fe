@@ -5,6 +5,7 @@ import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { type Lang, localePath, useT } from "@/i18n";
+import { asset } from "@/lib/base";
 
 interface Props {
   lang: Lang;
@@ -21,7 +22,7 @@ const t = useT(lang);
 const site = Astro.site ?? new URL("https://example.com");
 const url = (l: Lang) => new URL(localePath(l, path), site).href;
 const desc = description ?? t("meta.description");
-const ogImage = new URL("/og.jpg", site).href;
+const ogImage = new URL(asset("/og.jpg"), site).href;
 const ogLocale = { en: "en_US", vi: "vi_VN" } as const;
 ---
 
@@ -53,9 +54,9 @@ const ogLocale = { en: "en_US", vi: "vi_VN" } as const;
     <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href={asset("/sitemap-index.xml")} />
+    <link rel="icon" type="image/png" href={asset("/favicon.png")} />
+    <link rel="apple-touch-icon" href={asset("/apple-touch-icon.png")} />
     <!-- Before first paint, so a saved theme never flashes the other one. -->
     <script is:inline>
       document.documentElement.classList.add("js");

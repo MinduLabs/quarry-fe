@@ -4,11 +4,11 @@
  */
 export const en = {
   "meta.description": "Free, open-source database GUI for MySQL, MariaDB, PostgreSQL and SQL Server on Linux and macOS. Smart SQL editor, safe mode for production, no Java or Electron.",
-  "page.download": "Download Quarry for Linux and macOS",
+  "page.download": "Download | Quarry",
   "page.download.desc": "Download Quarry {version}: AppImage, .deb and Flatpak for Linux, a universal dmg for Apple silicon and Intel Macs. Free and open source.",
-  "page.faq": "Quarry FAQ: free, open source, TablePlus and DBeaver",
+  "page.faq": "FAQ | Quarry",
   "page.faq.desc": "Is Quarry free? How does it compare with TablePlus, DBeaver and Beekeeper Studio? Can it replace Azure Data Studio for SQL Server on Mac and Linux?",
-  "page.contact": "Contact Quarry",
+  "page.contact": "Contact | Quarry",
   "page.contact.desc": "Get help with Quarry, report a bug, request a feature or reach the team.",
 
   "nav.features": "Features",

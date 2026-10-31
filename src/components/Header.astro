@@ -1,5 +1,6 @@
 ---
 import { type Lang, localePath, otherLang, useT } from "@/i18n";
+import { asset } from "@/lib/base";
 import { LINKS } from "@/lib/site";
 
 interface Props {
@@ -15,7 +16,7 @@ const current = (p: string) => (p === path ? "page" : undefined);
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href={to("/")}><img src="/img/logo.webp" alt="" width="26" height="26" />Quarry</a>
+    <a class="brand" href={to("/")}><img src={asset("/img/logo.webp")} alt="" width="26" height="26" />Quarry</a>
     <nav class="nav-links">
       <a href={`${to("/")}#features`}>{t("nav.features")}</a>
       <a href={to("/download")} aria-current={current("/download")}>{t("nav.download")}</a>

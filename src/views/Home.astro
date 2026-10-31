@@ -1,6 +1,7 @@
 ---
 import Shot from "@/components/Shot.astro";
 import { type Lang, localePath, useT } from "@/i18n";
+import { asset } from "@/lib/base";
 import { formatMB, release } from "@/lib/release";
 import { softwareApp } from "@/lib/schema";
 import { LINKS } from "@/lib/site";
@@ -154,7 +155,7 @@ const stories = [
 
   <section class="final">
     <div class="wrap reveal">
-      <img class="logo" src="/img/logo.webp" alt="" width="72" height="72" loading="lazy" />
+      <img class="logo" src={asset("/img/logo.webp")} alt="" width="72" height="72" loading="lazy" />
       <h2 set:html={t("final.title")} />
       <p>{t("final.body")}</p>
       <div class="cta">

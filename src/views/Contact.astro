@@ -22,7 +22,7 @@ const groups: { title: Key; rows: Row[] }[] = [
   {
     title: "c.g1",
     rows: [
-      { href: `mailto:${LINKS.supportEmail}`, title: t("c.r1"), desc: "c.r1d", value: LINKS.supportEmail },
+      // { href: `mailto:${LINKS.supportEmail}`, title: t("c.r1"), desc: "c.r1d", value: LINKS.supportEmail },
       { href: localePath(lang, "/faq"), title: "FAQ", desc: "c.r2d", value: "→" },
     ],
   },
@@ -34,18 +34,18 @@ const groups: { title: Key; rows: Row[] }[] = [
       { href: LINKS.security, title: t("c.r5"), desc: "c.r5d", value: "GitHub Security ↗" },
     ],
   },
-  {
-    title: "c.g3",
-    rows: [
-      { href: LINKS.discussions, title: "GitHub Discussions", desc: "c.r6d", value: "↗" },
-      { href: LINKS.discord, title: "Discord", desc: "c.r7d", value: "↗" },
-      { href: LINKS.x, title: "X", desc: "c.r8d", value: `${LINKS.xHandle} ↗` },
-    ],
-  },
-  {
-    title: "c.g4",
-    rows: [{ href: `mailto:${LINKS.businessEmail}`, title: t("c.r9"), desc: "c.r9d", value: LINKS.businessEmail }],
-  },
+  // {
+  //   title: "c.g3",
+  //   rows: [
+  //     { href: LINKS.discussions, title: "GitHub Discussions", desc: "c.r6d", value: "↗" },
+  //     { href: LINKS.discord, title: "Discord", desc: "c.r7d", value: "↗" },
+  //     { href: LINKS.x, title: "X", desc: "c.r8d", value: `${LINKS.xHandle} ↗` },
+  //   ],
+  // },
+  // {
+  //   title: "c.g4",
+  //   rows: [{ href: `mailto:${LINKS.businessEmail}`, title: t("c.r9"), desc: "c.r9d", value: LINKS.businessEmail }],
+  // },
 ];
 ---
 
@@ -54,8 +54,8 @@ const groups: { title: Key; rows: Row[] }[] = [
     <aside class="contact-intro">
       <h1>{t("c.title")}</h1>
       <p>{t("c.sub")}</p>
-      <a class="contact-email" href={`mailto:${LINKS.supportEmail}`}>{LINKS.supportEmail}</a>
-      <p class="contact-small">{t("c.small")}</p>
+      {/* <a class="contact-email" href={`mailto:${LINKS.supportEmail}`}>{LINKS.supportEmail}</a>
+      <p class="contact-small">{t("c.small")}</p> */}
     </aside>
     <div class="clist">
       {groups.map((g) => (

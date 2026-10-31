@@ -16,6 +16,26 @@ pnpm preview    # serve dist/
 Needs Node 20 or newer. Set `SITE_URL` (for example `https://quarry.dev`) when building for
 production; canonical, hreflang and Open Graph links are built from it.
 
+## Deploy to GitHub Pages
+
+`.github/workflows/deploy.yml` builds and deploys on every push to `main`, to
+https://mindulabs.github.io/quarry-fe. Once, in the repo's Settings → Pages, set Source to
+**GitHub Actions**.
+
+The site lives under `/quarry-fe` there, so the workflow sets `BASE_PATH=/quarry-fe`. Internal links
+and files go through `localePath()` and `asset()` (`src/lib/base.ts`), which add it; never write a
+root path like `/img/...` straight into a page. For a custom domain, add `public/CNAME`, set
+`SITE_URL` to the domain and drop `BASE_PATH`.
+
+## Deploy with Docker
+
+```bash
+SITE_URL=https://quarry.dev PORT=8080 docker compose up -d --build
+```
+
+The image builds the site, then serves `dist/` with nginx on port 80 inside the container (`PORT`
+on the host, 8080 by default). Release data is read at build time, so rebuild after a new release.
+
 ## Layout
 
 | Path | What it holds |

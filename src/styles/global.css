@@ -289,7 +289,7 @@ a.contact:hover { border-color: var(--line-strong); }
 
 /* Footer */
 footer { border-top: 1px solid var(--line); padding: 56px 0 40px; font-size: 14px; color: var(--muted); }
-.foot-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; }
+.foot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 .foot-grid h5 { margin: 0 0 14px; font-size: 13px; font-weight: 600; color: var(--fg); }
 .foot-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .foot-grid a:hover { color: var(--fg); }
@@ -317,7 +317,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 40px; font-size: 14p
   .facts { grid-template-columns: repeat(2, 1fr); }
   .fact:nth-child(3) { border-left: 0; }
   .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
-  .foot-grid { grid-template-columns: repeat(3, 1fr); }
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 720px) {
   .grid, .reqs, .contacts { grid-template-columns: 1fr; }

@@ -1,4 +1,6 @@
 ---
+import { asset } from "@/lib/base";
+
 /**
  * A screenshot in both themes. The browser picks the light one by the system theme; site.ts
  * re-points the sources when the visitor chooses a theme by hand.
@@ -17,13 +19,13 @@ interface Props {
 
 const { name, width, height, alt, sizes, class: className, eager = false } = Astro.props;
 const set = (theme: "dark" | "light") =>
-  `/img/${name}-${theme}-1x.webp ${width}w, /img/${name}-${theme}.webp ${width * 2}w`;
+  `${asset(`/img/${name}-${theme}-1x.webp`)} ${width}w, ${asset(`/img/${name}-${theme}.webp`)} ${width * 2}w`;
 ---
 
 <picture class:list={["shot", className]}>
   <source media="(prefers-color-scheme: light)" data-theme-src srcset={set("light")} sizes={sizes} />
   <img
-    src={`/img/${name}-dark-1x.webp`}
+    src={asset(`/img/${name}-dark-1x.webp`)}
     srcset={set("dark")}
     sizes={sizes}
     width={width}

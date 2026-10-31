@@ -1,4 +1,5 @@
 import { type Dict, type Key, en } from "./en";
+import { asset } from "@/lib/base";
 import { vi } from "./vi";
 
 export const LOCALES = ["en", "vi"] as const;
@@ -13,10 +14,13 @@ export function useT(lang: Lang) {
     dict[key].replace(/\{(\w+)\}/g, (match, name: string) => (name in vars ? String(vars[name]) : match));
 }
 
-/** The URL of a page in a language: "/download" stays as is in English, becomes "/vi/download". */
+/**
+ * The URL of a page in a language: "/download" stays as is in English, becomes "/vi/download".
+ * Both carry the site's base path when it has one.
+ */
 export function localePath(lang: Lang, path: string): string {
-  if (lang === "en") return path;
-  return path === "/" ? "/vi" : `/vi${path}`;
+  if (lang === "en") return asset(path);
+  return asset(path === "/" ? "/vi" : `/vi${path}`);
 }
 
 export function otherLang(lang: Lang): Lang {

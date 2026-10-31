@@ -2,11 +2,11 @@ import type { Dict } from "./en";
 
 export const vi: Dict = {
   "meta.description": "Phần mềm quản lý database miễn phí, mã nguồn mở cho MySQL, MariaDB, PostgreSQL và SQL Server trên Linux và macOS. SQL editor thông minh, safe mode cho production.",
-  "page.download": "Tải Quarry cho Linux và macOS",
+  "page.download": "Tải về | Quarry",
   "page.download.desc": "Tải Quarry {version}: AppImage, .deb và Flatpak cho Linux, dmg Universal cho Mac Apple silicon và Intel. Miễn phí, mã nguồn mở.",
-  "page.faq": "Câu hỏi thường gặp về Quarry",
+  "page.faq": "Câu hỏi thường gặp | Quarry",
   "page.faq.desc": "Quarry có miễn phí không? Khác gì TablePlus, DBeaver và Beekeeper Studio? Có thay được Azure Data Studio cho SQL Server trên Mac và Linux không?",
-  "page.contact": "Liên hệ Quarry",
+  "page.contact": "Liên hệ | Quarry",
   "page.contact.desc": "Hỏi đáp, báo lỗi, đề xuất tính năng hoặc liên hệ đội ngũ Quarry.",
 
   "nav.features": "Tính năng",
