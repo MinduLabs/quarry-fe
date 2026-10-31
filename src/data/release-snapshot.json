@@ -1,0 +1,72 @@
+{
+  "tag_name": "v0.1.0",
+  "published_at": "2026-10-31T01:58:58Z",
+  "html_url": "https://github.com/MinduLabs/quarry/releases/tag/v0.1.0",
+  "assets": [
+    {
+      "name": "drivers.json",
+      "size": 1660,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/drivers.json"
+    },
+    {
+      "name": "latest.json",
+      "size": 1860,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/latest.json"
+    },
+    {
+      "name": "quarry-0.1.0.flatpak",
+      "size": 5912168,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-0.1.0.flatpak"
+    },
+    {
+      "name": "quarry-driver-mysql-universal-apple-darwin",
+      "size": 6512720,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-mysql-universal-apple-darwin"
+    },
+    {
+      "name": "quarry-driver-mysql-x86_64-unknown-linux-gnu",
+      "size": 3930176,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-mysql-x86_64-unknown-linux-gnu"
+    },
+    {
+      "name": "quarry-driver-postgres-universal-apple-darwin",
+      "size": 5853312,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-postgres-universal-apple-darwin"
+    },
+    {
+      "name": "quarry-driver-postgres-x86_64-unknown-linux-gnu",
+      "size": 3492968,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-postgres-x86_64-unknown-linux-gnu"
+    },
+    {
+      "name": "quarry-driver-sqlserver-universal-apple-darwin",
+      "size": 7736656,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-sqlserver-universal-apple-darwin"
+    },
+    {
+      "name": "quarry-driver-sqlserver-x86_64-unknown-linux-gnu",
+      "size": 4700776,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/quarry-driver-sqlserver-x86_64-unknown-linux-gnu"
+    },
+    {
+      "name": "Quarry_0.1.0_amd64.AppImage",
+      "size": 86010360,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/Quarry_0.1.0_amd64.AppImage"
+    },
+    {
+      "name": "Quarry_0.1.0_amd64.deb",
+      "size": 7926906,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/Quarry_0.1.0_amd64.deb"
+    },
+    {
+      "name": "Quarry_0.1.0_universal.app.tar.gz",
+      "size": 13758744,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/Quarry_0.1.0_universal.app.tar.gz"
+    },
+    {
+      "name": "Quarry_0.1.0_universal.dmg",
+      "size": 14182650,
+      "browser_download_url": "https://github.com/MinduLabs/quarry/releases/download/v0.1.0/Quarry_0.1.0_universal.dmg"
+    }
+  ]
+}

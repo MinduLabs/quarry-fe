@@ -1,0 +1,36 @@
+---
+/**
+ * A screenshot in both themes. The browser picks the light one by the system theme; site.ts
+ * re-points the sources when the visitor chooses a theme by hand.
+ */
+interface Props {
+  /** File stem in /public/img: "<name>-dark.webp", "<name>-dark-1x.webp", and the light pair. */
+  name: string;
+  /** Size at 1x, in CSS pixels. */
+  width: number;
+  height: number;
+  alt: string;
+  sizes: string;
+  class?: string;
+  eager?: boolean;
+}
+
+const { name, width, height, alt, sizes, class: className, eager = false } = Astro.props;
+const set = (theme: "dark" | "light") =>
+  `/img/${name}-${theme}-1x.webp ${width}w, /img/${name}-${theme}.webp ${width * 2}w`;
+---
+
+<picture class:list={["shot", className]}>
+  <source media="(prefers-color-scheme: light)" data-theme-src srcset={set("light")} sizes={sizes} />
+  <img
+    src={`/img/${name}-dark-1x.webp`}
+    srcset={set("dark")}
+    sizes={sizes}
+    width={width}
+    height={height}
+    alt={alt}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+  />
+</picture>

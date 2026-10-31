@@ -1,0 +1,100 @@
+---
+import { type Lang, localePath, useT } from "@/i18n";
+import { formatDate, formatMB, release } from "@/lib/release";
+import { softwareApp } from "@/lib/schema";
+import { LINKS } from "@/lib/site";
+import Base from "@/layouts/Base.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const linux = [
+  { title: "AppImage", file: release.appimage, desc: "d.appimage", cmd: `chmod +x ${release.appimage.name}`, isRecommended: true },
+  { title: ".deb", file: release.deb, desc: "d.deb", cmd: `sudo apt install ./${release.deb.name}`, isRecommended: false },
+  { title: "Flatpak", file: release.flatpak, desc: "d.flatpak", cmd: `flatpak install --user ${release.flatpak.name}`, isRecommended: false },
+] as const;
+---
+
+<Base
+  lang={lang}
+  path="/download"
+  title={t("page.download")}
+  description={t("page.download.desc", { version: release.version })}
+  jsonLd={softwareApp(lang, Astro.site ?? new URL("https://example.com"))}
+>
+  <section class="page-head grid-bg">
+    <div class="wrap">
+      <h1>{t("d.title")}</h1>
+      <p>{t("d.sub", { version: release.version, date: formatDate(release.publishedAt, lang) })}</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="os-tabs">
+      <input type="radio" name="os" id="os-linux" checked />
+      <input type="radio" name="os" id="os-mac" />
+      <div class="seg">
+        <label for="os-linux">Linux</label>
+        <label for="os-mac">macOS</label>
+      </div>
+    </div>
+
+    <div class="os-panel panel-linux">
+      <div class="pkgs">
+        {linux.map((p) => (
+          <div class:list={["pkg", { rec: p.isRecommended }]}>
+            <div class="pkg-top"><h3>{p.title}</h3>{p.isRecommended && <span class="badge">{t("d.rec")}</span>}</div>
+            <p>{t(p.desc)}</p>
+            <dl><dt>{t("d.file")}</dt><dd>{p.file.name}</dd><dt>{t("d.size")}</dt><dd>{formatMB(p.file.size, lang)}</dd></dl>
+            <div class="cmd"><code>{p.cmd}</code><button class="copy" type="button" data-copied={t("copied")}>{t("copy")}</button></div>
+            <a class:list={["btn", p.isRecommended ? "btn-primary" : "btn-ghost"]} href={p.file.url}>{t("d.get")}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="os-panel panel-mac">
+      <div class="pkgs one">
+        <div class="pkg rec">
+          <div class="pkg-top"><h3>macOS</h3><span class="badge">Universal</span></div>
+          <p>{t("d.mac")}</p>
+          <dl>
+            <dt>{t("d.file")}</dt><dd>{release.dmg.name}</dd>
+            <dt>{t("d.size")}</dt><dd>{formatMB(release.dmg.size, lang)}</dd>
+            <dt>{t("d.needs")}</dt><dd>{t("d.macNeeds")}</dd>
+          </dl>
+          <a class="btn btn-primary" href={release.dmg.url}>{t("d.get")}</a>
+        </div>
+      </div>
+      <div class="note narrow-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+        <div class="note-body">
+          <span set:html={t("d.notarize")} />
+          <div class="cmd"><code>xattr -cr /Applications/Quarry.app</code><button class="copy" type="button" data-copied={t("copied")}>{t("copy")}</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="release-row">
+      <a class="link" href={release.notesUrl}>{t("d.notes")}</a>
+      <a class="link" href={LINKS.releases}>{t("d.older")}</a>
+      <a class="link" href={LINKS.buildFromSource}>{t("d.source")}</a>
+    </div>
+
+    <div class="reqs">
+      <div><h4>Linux</h4><p>{t("d.r1")}</p></div>
+      <div><h4>macOS</h4><p>{t("d.r2")}</p></div>
+      <div><h4>{t("d.r3t")}</h4><p>{t("d.r3")}</p></div>
+    </div>
+  </section>
+
+  <section class="narrow page-faq">
+    <div class="section-head"><h2>{t("d.faq")}</h2></div>
+    <details><summary>{t("dq1")}</summary><div class="a"><p set:html={t("da1")} /></div></details>
+    <details><summary>{t("dq2")}</summary><div class="a"><p set:html={t("da2")} /></div></details>
+    <p class="contact-foot" set:html={t("d.more", { faq: localePath(lang, "/faq") })} />
+  </section>
+</Base>

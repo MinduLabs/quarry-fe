@@ -1,0 +1,169 @@
+---
+import Shot from "@/components/Shot.astro";
+import { type Lang, localePath, useT } from "@/i18n";
+import { formatMB, release } from "@/lib/release";
+import { softwareApp } from "@/lib/schema";
+import { LINKS } from "@/lib/site";
+import Base from "@/layouts/Base.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const to = (p: string) => localePath(lang, p);
+const mod = '<kbd class="js-mod">Ctrl</kbd>';
+const linuxLabel = `AppImage · ${formatMB(release.appimage.size, lang)}`;
+const macLabel = `dmg Universal · ${formatMB(release.dmg.size, lang)}`;
+const driverRange = `${formatMB(release.linuxDrivers.min, lang).replace(" MB", "")}–${formatMB(release.linuxDrivers.max, lang)}`;
+const stageSizes = "(min-width: 1200px) 800px, 66vw";
+
+const stories = [
+  { key: "s1", dot: "", shot: { name: "editor", width: 584, height: 300 }, points: ["s1.p1", "s1.p2", "s1.p3", "s1.p4"] },
+  { key: "s2", dot: "prod", shot: { name: "safe", width: 1031, height: 560 }, points: ["s2.p1", "s2.p2", "s2.p3", "s2.p4"] },
+  { key: "s3", dot: "", shot: { name: "edit", width: 802, height: 330 }, points: ["s3.p1", "s3.p2", "s3.p3"] },
+] as const;
+---
+
+<Base lang={lang} path="/" title={t("home.title")} jsonLd={softwareApp(lang, Astro.site ?? new URL("https://example.com"))}>
+  <section class="hero grid-bg">
+    <div class="wrap">
+      <a class="eyebrow" href={release.notesUrl}><b>v{release.version}</b><span>{t("home.eyebrow", { version: release.version })}</span></a>
+      <h1 set:html={t("home.h1")} />
+      <p class="lede">{t("home.lede")}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href={release.appimage.url} data-mac-href={release.dmg.url}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+          <span data-mac-text={t("dl.for", { os: "macOS" })}>{t("dl.for", { os: "Linux" })}</span>
+        </a>
+        <a class="btn btn-ghost" href={LINKS.repo}>{t("home.github")}</a>
+      </div>
+      <p class="meta"><span data-mac-text={macLabel}>{linuxLabel}</span> · <a href={to("/download")}>{t("home.others")}</a></p>
+      <div class="shot-stage">
+        <Shot name="hero" width={1280} height={820} alt={t("home.heroAlt")} sizes="(min-width: 1152px) 1120px, 100vw" eager />
+      </div>
+    </div>
+  </section>
+
+  <section class="dbs wrap reveal">
+    <h2 class="dbs-title">{t("home.dbs")}</h2>
+    <ul><li>MySQL</li><li>MariaDB</li><li>PostgreSQL</li><li>SQL Server</li></ul>
+  </section>
+
+  <section id="features">
+    <div class="section-head wrap reveal">
+      <h2 set:html={t("home.stories")} />
+    </div>
+    <div class="stories wrap">
+      <div class="story-list">
+        {stories.map((s) => (
+          <article class="story">
+            <div class="tag"><i class={s.dot} /><span>{t(`${s.key}.tag`)}</span></div>
+            <h3>{t(`${s.key}.title`)}</h3>
+            <p>{t(`${s.key}.body`)}</p>
+            <ul class="points">
+              {s.points.map((p) => <li><span set:html={t(p, { run: `${mod} <kbd>Enter</kbd>` })} /></li>)}
+            </ul>
+            <Shot {...s.shot} class="inline-shot" alt={t(`${s.key}.alt`)} sizes="100vw" />
+          </article>
+        ))}
+      </div>
+      <div class="stage" aria-hidden="true">
+        {stories.map((s) => <Shot {...s.shot} alt="" sizes={stageSizes} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <h2 set:html={t("home.bento")} />
+    </div>
+    <div class="bento">
+      <div class="card span-3 reveal">
+        <h3>{t("b1.t")}</h3>
+        <p>{t("b1.b")}</p>
+        <div class="art"><div class="mini-status"><span class="seg"><span>Data</span><span>Structure</span></span><span>4 ms</span><span class="pages">1–500 <u>of ~20,121 rows</u></span></div></div>
+      </div>
+      <div class="card span-3 reveal">
+        <h3>{t("b2.t")}</h3>
+        <p>{t("b2.b")}</p>
+        <div class="art formats"><span>CSV</span><span>TSV</span><span>JSON</span><span>NDJSON</span><span>SQL INSERT</span><span>Excel</span></div>
+      </div>
+      <div class="card span-2 reveal">
+        <h3>{t("b3.t")}</h3>
+        <p>{t("b3.b")}</p>
+        <div class="art formats"><span>{t("b3.c1")}</span><span>{t("b3.c2")}</span><span>{t("b3.c3")}</span></div>
+      </div>
+      <div class="card span-2 reveal">
+        <h3>{t("b4.t")}</h3>
+        <p>{t("b4.b")}</p>
+        <div class="art code"><span class="k">ALTER TABLE</span> products
+  <span class="k">ADD COLUMN</span> weight_g <span class="k">INT NULL</span>;</div>
+      </div>
+      <div class="card span-2 reveal">
+        <h3>{t("b5.t")}</h3>
+        <div class="art kbd-list">
+          <div><span>{t("b5.k1")}</span><span><kbd class="js-mod">Ctrl</kbd><kbd>K</kbd></span></div>
+          <div><span>{t("b5.k2")}</span><span><kbd class="js-mod">Ctrl</kbd><kbd>Shift</kbd><kbd>P</kbd></span></div>
+          <div><span>{t("b5.k3")}</span><span><kbd class="js-mod">Ctrl</kbd><kbd>T</kbd></span></div>
+          <div><span>{t("b5.k4")}</span><span><kbd class="js-mod">Ctrl</kbd><kbd>Enter</kbd></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <div class="facts">
+      <div class="fact"><b>{formatMB(release.deb.size, lang)}</b><span>{t("f.deb")}</span></div>
+      <div class="fact"><b>{formatMB(release.dmg.size, lang)}</b><span>{t("f.mac")}</span></div>
+      <div class="fact"><b>{driverRange}</b><span>{t("f.drv")}</span></div>
+      <div class="fact"><b>0</b><span>{t("f.acc")}</span></div>
+    </div>
+    <p class="facts-src"><a href={release.notesUrl}>{t("f.src", { version: release.version })}</a></p>
+  </section>
+
+  <section class="wrap">
+    <div class="grid">
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>
+        <h4>{t("g1.t")}</h4><p>{t("g1.b")}</p>
+      </div>
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+        <h4>{t("g2.t")}</h4><p>{t("g2.b")}</p>
+      </div>
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M12 3v18"></path></svg>
+        <h4>{t("g3.t")}</h4><p>{t("g3.b")}</p>
+      </div>
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
+        <h4>{t("g4.t")}</h4><p>{t("g4.b")}</p>
+      </div>
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12h-8"></path><path d="M21 6H8"></path><path d="M21 18h-8"></path><path d="M3 6v4c0 1.1.9 2 2 2h3"></path><path d="M3 10v6c0 1.1.9 2 2 2h3"></path></svg>
+        <h4>{t("g5.t")}</h4><p>{t("g5.b")}</p>
+      </div>
+      <div class="cell reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>
+        <h4>{t("g6.t")}</h4><p>{t("g6.b")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap reveal">
+      <img class="logo" src="/img/logo.webp" alt="" width="72" height="72" loading="lazy" />
+      <h2 set:html={t("final.title")} />
+      <p>{t("final.body")}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href={release.appimage.url} data-mac-href={release.dmg.url}>
+          <span data-mac-text={t("dl.for", { os: "macOS" })}>{t("dl.for", { os: "Linux" })}</span>
+        </a>
+        <a class="btn btn-ghost" href={LINKS.repo}>{t("final.star")}</a>
+      </div>
+      <p class="meta" set:html={t("final.faq", { faq: to("/faq"), contact: to("/contact") })} />
+    </div>
+  </section>
+</Base>

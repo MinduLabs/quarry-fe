@@ -1,0 +1,64 @@
+---
+import { type Lang, localePath, useT } from "@/i18n";
+import { release } from "@/lib/release";
+import { LINKS } from "@/lib/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const to = (p: string) => localePath(lang, p);
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h5>{t("foot.product")}</h5>
+        <ul>
+          <li><a href={`${to("/")}#features`}>{t("nav.features")}</a></li>
+          <li><a href={to("/download")}>{t("nav.download")}</a></li>
+          <li><a href={LINKS.changelog}>{t("nav.changelog")}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>{t("foot.resources")}</h5>
+        <ul>
+          <li><a href={to("/faq")}>{t("nav.faq")}</a></li>
+          <li><a href={LINKS.repo}>{t("foot.source")}</a></li>
+          <li><a href={LINKS.issues}>{t("foot.issues")}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>{t("foot.support")}</h5>
+        <ul>
+          <li><a href={`mailto:${LINKS.supportEmail}`}>{t("foot.email")}</a></li>
+          <li><a href={to("/contact")}>{t("nav.contact")}</a></li>
+          <li><a href={LINKS.security}>{t("foot.security")}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>{t("foot.community")}</h5>
+        <ul>
+          <li><a href={LINKS.discussions}>GitHub Discussions ↗</a></li>
+          <li><a href={LINKS.discord}>Discord ↗</a></li>
+          <li><a href={LINKS.x}>X ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>{t("foot.legal")}</h5>
+        <ul>
+          <li><a href={LINKS.license}>{t("foot.license")}</a></li>
+          <li><a href={LINKS.privacy}>{t("foot.privacy")}</a></li>
+          <li><a href={LINKS.terms}>{t("foot.terms")}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="brand"><img src="/img/logo.webp" alt="" width="20" height="20" loading="lazy" />{t("foot.copy", { year: new Date().getFullYear() })}</span>
+      <span>v{release.version}</span>
+    </div>
+  </div>
+</footer>

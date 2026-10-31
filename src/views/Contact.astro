@@ -1,0 +1,74 @@
+---
+import { type Lang, localePath, useT } from "@/i18n";
+import type { Key } from "@/i18n/en";
+import { LINKS } from "@/lib/site";
+import Base from "@/layouts/Base.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+interface Row {
+  href: string;
+  title: string;
+  desc: Key;
+  value: string;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const groups: { title: Key; rows: Row[] }[] = [
+  {
+    title: "c.g1",
+    rows: [
+      { href: `mailto:${LINKS.supportEmail}`, title: t("c.r1"), desc: "c.r1d", value: LINKS.supportEmail },
+      { href: localePath(lang, "/faq"), title: "FAQ", desc: "c.r2d", value: "→" },
+    ],
+  },
+  {
+    title: "c.g2",
+    rows: [
+      { href: LINKS.issues, title: t("c.r3"), desc: "c.r3d", value: "GitHub Issues ↗" },
+      { href: LINKS.issues, title: t("c.r4"), desc: "c.r4d", value: "GitHub Issues ↗" },
+      { href: LINKS.security, title: t("c.r5"), desc: "c.r5d", value: "GitHub Security ↗" },
+    ],
+  },
+  {
+    title: "c.g3",
+    rows: [
+      { href: LINKS.discussions, title: "GitHub Discussions", desc: "c.r6d", value: "↗" },
+      { href: LINKS.discord, title: "Discord", desc: "c.r7d", value: "↗" },
+      { href: LINKS.x, title: "X", desc: "c.r8d", value: `${LINKS.xHandle} ↗` },
+    ],
+  },
+  {
+    title: "c.g4",
+    rows: [{ href: `mailto:${LINKS.businessEmail}`, title: t("c.r9"), desc: "c.r9d", value: LINKS.businessEmail }],
+  },
+];
+---
+
+<Base lang={lang} path="/contact" title={t("page.contact")} description={t("page.contact.desc")}>
+  <div class="wrap contact-layout">
+    <aside class="contact-intro">
+      <h1>{t("c.title")}</h1>
+      <p>{t("c.sub")}</p>
+      <a class="contact-email" href={`mailto:${LINKS.supportEmail}`}>{LINKS.supportEmail}</a>
+      <p class="contact-small">{t("c.small")}</p>
+    </aside>
+    <div class="clist">
+      {groups.map((g) => (
+        <section>
+          <h2>{t(g.title)}</h2>
+          {g.rows.map((r) => (
+            <a class="crow" href={r.href}>
+              <span><b>{r.title}</b><small>{t(r.desc)}</small></span>
+              <em>{r.value}</em>
+            </a>
+          ))}
+        </section>
+      ))}
+    </div>
+  </div>
+</Base>
